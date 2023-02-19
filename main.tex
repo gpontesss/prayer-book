@@ -1,0 +1,88 @@
+\documentclass[
+    twoside,
+    DIV=14,
+    % draft,
+    fontsize=12pt,
+    paper=12cm:18cm,
+]{scrbook}
+
+\usepackage{fontspec}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{svg}
+\usepackage[explicit]{titlesec}
+\usepackage[portuguese]{babel}
+\usepackage{parskip} % maybe investigate using koma-script's class option
+\usepackage{hanging}
+\usepackage{subfiles}
+
+% TODO: extract common functions and format setup to a common package
+
+% font setup ===================================================================
+
+\setmainfont[
+    BoldFont={[EBGaramond-Bold]},
+    ItalicFont={[EBGaramond-MediumItalic]},
+    BoldItalicFont={[EBGaramond-BoldItalic]},
+]{[EBGaramond-Medium]}
+
+\setsansfont{[EBGaramond-Regular]}
+
+% domain functions =============================================================
+
+\definecolor{docolor}{HTML}{e05e6d}
+\newcommand{\dotext}[1]{{\color{docolor}#1}}
+\newcommand{\dotextit}[1]{{\dotext{\textit{#1}}}}
+
+\newcommand{\Chapter}[2]{%
+\chapter[#1 #2]{#1}
+{\centering\textit{\Large{#2}}\par}}
+
+\newcommand{\theotokion}{\textbf{\dotextit{Theotokion: }}}
+\newcommand{\eirmos}{\textbf{\dotextit{Eirmos: }}}
+\newcommand{\refrain}{\textbf{\dotextit{Refrão: }}}
+
+% TODO: there's an issue with the default page style.
+\pagestyle{plain}
+
+% stylization of headers of kinds ==============================================
+
+\titleformat{\chapter}[block]
+    {\Huge\centering}%
+    {\includegraphics[width=\textwidth]{headers/byzantine-circles}\break{}%
+    \textmd{\MakeUppercase{#1}}}
+    {0ex}%
+    {}{}
+\titlespacing*{\chapter}{0pt}{0pt}{8pt}
+
+\titleformat{\section}[block]
+    {\normalsize}%
+    {\textbf{\MakeUppercase{#1}}}
+    {0ex}%
+    {}{}
+
+% ==============================================================================
+
+\begin{document}
+
+\title{Livro de Orações}
+\subtitle{Versão adaptada\break{}Paróquia da Catedral Ortodoxa de São Nicolau}
+\date{2023}
+\publishers{}
+
+\maketitle{}%
+\raggedbottom{}
+
+\tableofcontents{}
+
+\mainmatter{}
+
+\subfile{blocks/matins.tex}
+\subfile{blocks/during-day.tex}
+\subfile{blocks/vespers.tex}
+\subfile{blocks/supplicatory-canon-christ.tex}
+\subfile{blocks/supplicatory-canon-theotokos.tex}
+\subfile{blocks/canon-guardian-angel.tex}
+\subfile{blocks/akathist-sweetest-lord-jesus-christ.tex}
+
+\end{document}
