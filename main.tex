@@ -37,26 +37,8 @@
 
 % font setup ===================================================================
 
-% TODO: fonts are the problem with page style. it seems to have something to do
-% with square brackets? https://tex.stackexchange.com/questions/447849/xelatex-exhibiting-strange-behaviour-surrounding-new-pages-and-text-shapes
-% \newfontfamily{\garamondfont}[
-%     BoldFont={[EBGaramond-Bold]},
-%     ItalicFont={[EBGaramond-MediumItalic]},
-%     BoldItalicFont={[EBGaramond-BoldItalic]},
-% ]{[EBGaramond-Medium]}
-
 \setmainfont{EBGaramond-Medium}
 \setsansfont{EBGaramond-Medium}
-
-% TODO: use defined garamond
-% \setmainfont[
-%     BoldFont={[EBGaramond-Bold]},
-%     ItalicFont={[EBGaramond-MediumItalic]},
-%     BoldItalicFont={[EBGaramond-BoldItalic]},
-% ]{[EBGaramond-Medium]}
-
-% \setsansfont{[EBGaramond-Regular]}
-% \setkomafont{disposition}{\garamondfont}
 
 % domain functions =============================================================
 
@@ -64,7 +46,7 @@
 \newcommand{\dotext}[1]{{\color{docolor}#1}}
 \newcommand{\dotextit}[1]{{\dotext{\textit{#1}}}}
 
-% stylization of headers of kinds ==============================================
+% stylization of header and footer =============================================
 
 \RedeclareSectionCommand[
     beforeskip=\parskip,
@@ -85,10 +67,18 @@
     \chapheader{#1}
     \chapter[#2 #3]{#2}\vspace*{-2\parskip}{\centering\textit{\Large{#3}}\par}}
 
-\pagestyle{myheadings}
-\automark*{chapter}
+\renewcommand*{\chaptermarkformat}{\footnotesize\normalfont\bfseries}
 
-\renewcommand*{\chaptermarkformat}{\normalfont\bfseries}
+\pagestyle{scrheadings}
+\automark*{chapter}
+\cehead{\MakeMarkcase{\chaptermarkformat{\booktitle}}}
+\lehead{}
+\cohead{\leftmark}
+
+\lefoot{}
+\cefoot{\pagemark}
+\rofoot{}
+\cofoot{\pagemark}
 
 % common prayers/text ==========================================================
 
