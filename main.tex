@@ -1,12 +1,11 @@
 \documentclass[
     twoside,
     DIV=14,
-    % draft,
     fontsize=12pt,
     paper=12cm:18cm,
     headsepline=true,
-    % headtopline=true,
-    % headings=optiontohead,
+    parskip=half*,
+    % draft,
 ]{scrbook}
 
 \usepackage{fontspec}
@@ -15,7 +14,6 @@
 \usepackage{graphicx}
 \usepackage{svg}
 \usepackage[portuguese]{babel}
-\usepackage{parskip} % maybe investigate using koma-script's class option
 % \usepackage{background}
 \usepackage[markcase=upper]{scrlayer-scrpage}
 \usepackage{subfiles}
@@ -73,7 +71,7 @@
     afterskip=\parskip,
 ]{section}
 \renewcommand{\sectionlinesformat}[4]{%
-    \small\centering{\dotext{\textbf{\uppercase{#4}}}}}
+    \small\centering{\dotext{\textbf{\uppercase{#4}}}}\vspace*{-\parskip}}
 \WithSuffix\newcommand\Section*[2]{%
     \dotext{\section*{#1}\vspace*{-\parskip}{\small\centering\textit{#2}\par}}}
 
