@@ -4,6 +4,9 @@
     % draft,
     fontsize=12pt,
     paper=12cm:18cm,
+    headsepline=true,
+    % headtopline=true,
+    % headings=optiontohead,
 ]{scrbook}
 
 \usepackage{fontspec}
@@ -14,7 +17,10 @@
 \usepackage[portuguese]{babel}
 \usepackage{parskip} % maybe investigate using koma-script's class option
 % \usepackage{background}
+\usepackage[markcase=upper]{scrlayer-scrpage}
 \usepackage{subfiles}
+
+\newcommand\booktitle{Livro de Orações}
 
 % source: https://tex.stackexchange.com/questions/801/what-is-the-easiest-way-to-get-borders-around-a-page-in-latex
 % \usetikzlibrary{calc}
@@ -33,21 +39,26 @@
 
 % font setup ===================================================================
 
-\newfontfamily{\garamondfont}[
-    BoldFont={[EBGaramond-Bold]},
-    ItalicFont={[EBGaramond-MediumItalic]},
-    BoldItalicFont={[EBGaramond-BoldItalic]},
-]{[EBGaramond-Medium]}
+% TODO: fonts are the problem with page style. it seems to have something to do
+% with square brackets? https://tex.stackexchange.com/questions/447849/xelatex-exhibiting-strange-behaviour-surrounding-new-pages-and-text-shapes
+% \newfontfamily{\garamondfont}[
+%     BoldFont={[EBGaramond-Bold]},
+%     ItalicFont={[EBGaramond-MediumItalic]},
+%     BoldItalicFont={[EBGaramond-BoldItalic]},
+% ]{[EBGaramond-Medium]}
+
+\setmainfont{EBGaramond-Medium}
+\setsansfont{EBGaramond-Medium}
 
 % TODO: use defined garamond
-\setmainfont[
-    BoldFont={[EBGaramond-Bold]},
-    ItalicFont={[EBGaramond-MediumItalic]},
-    BoldItalicFont={[EBGaramond-BoldItalic]},
-]{[EBGaramond-Medium]}
+% \setmainfont[
+%     BoldFont={[EBGaramond-Bold]},
+%     ItalicFont={[EBGaramond-MediumItalic]},
+%     BoldItalicFont={[EBGaramond-BoldItalic]},
+% ]{[EBGaramond-Medium]}
 
-\setsansfont{[EBGaramond-Regular]}
-\setkomafont{disposition}{\garamondfont}
+% \setsansfont{[EBGaramond-Regular]}
+% \setkomafont{disposition}{\garamondfont}
 
 % domain functions =============================================================
 
@@ -76,23 +87,10 @@
     \chapheader{#1}
     \chapter[#2 #3]{#2}\vspace*{-2\parskip}{\centering\textit{\Large{#3}}\par}}
 
-% TODO: there's an issue with the default page style.
-\pagestyle{plain}
+\pagestyle{myheadings}
+\automark*{chapter}
 
-% \titleformat{\chapter}[block]
-%     {\Huge\centering}%
-%     {\includesvg[width=\textwidth]{headers/byzantine-circles}\break{}%
-%     \textmd{\MakeUppercase{#1}}}
-%     {0ex}%
-%     {}{}
-% \titlespacing*{\chapter}{0pt}{0pt}{8pt}
-
-% \titleformat{\section}[block]
-%     {\small\centering}%
-%     {\dotext{\textbf{\MakeUppercase{#1}}}}
-%     {0ex}%
-%     {}{}
-% \titlespacing*{\section*}{0pt}{\parskip}{0pt}
+\renewcommand*{\chaptermarkformat}{\normalfont\bfseries}
 
 % common prayers/text ==========================================================
 
@@ -128,7 +126,7 @@ de toda a impureza e salva as nossas almas, Tu que és bom.}
 
 \begin{document}
 
-\title{Livro de Orações}
+\title{\booktitle}
 \subtitle{Versão adaptada\break{}Paróquia da Catedral Ortodoxa de São Nicolau}
 \date{2023}
 \publishers{}
