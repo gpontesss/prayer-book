@@ -15,7 +15,9 @@
 \usepackage{svg}
 \usepackage[portuguese]{babel}
 % \usepackage{background}
-\usepackage[markcase=upper]{scrlayer-scrpage}
+\usepackage[
+    markcase=upper,
+]{scrlayer-scrpage}
 \usepackage{subfiles}
 
 \newcommand\booktitle{Livro de Orações}
@@ -38,7 +40,10 @@
 % font setup ===================================================================
 
 \setmainfont{EBGaramond-Medium}
-\setsansfont{EBGaramond-Medium}
+\setsansfont{GentiumBookPlus}
+% \setmainfont{EBGaramond-Medium}
+% \setsansfont{EBGaramond-Medium}
+% \setsansfont{GentiumBookPlus}
 
 % domain functions =============================================================
 
@@ -46,28 +51,37 @@
 \newcommand{\dotext}[1]{{\color{docolor}#1}}
 \newcommand{\dotextit}[1]{{\dotext{\textit{#1}}}}
 
-% stylization of header and footer =============================================
+% stylization of chapters and sections =========================================
 
 \RedeclareSectionCommand[
     beforeskip=\parskip,
     afterskip=\parskip,
 ]{section}
 \renewcommand{\sectionlinesformat}[4]{%
-    \small\centering{\dotext{\textbf{\uppercase{#4}}}}\vspace*{-\parskip}}
+    \footnotesize\centering{\dotext{\uppercase{#4}}}\vspace*{-2\parskip}}
 \WithSuffix\newcommand\Section*[2]{%
-    \dotext{\section*{#1}\vspace*{-\parskip}{\small\centering\textit{#2}\par}}}
+    \dotext{\section*{#1}{\small\centering\textit{#2}\par}\vspace*{-\parskip}}}
 
 \newtoks\chapheader
 \chapheader{headers/byzantine-circles}
 
+\RedeclareSectionCommand[
+    beforeskip=0pt,
+    afterskip=\parskip,
+]{chapter}
 \renewcommand{\chapterlinesformat}[3]{%
-    \includesvg[width=\textwidth]{\the\chapheader}\break{}%
-    \Huge\centering{\textbf{\uppercase{#3}}}}
+    % \includesvg[width=\textwidth]{\the\chapheader}\break{}%
+    \normalfont\Huge\centering{\uppercase{#3}}}
 \newcommand{\Chapter}[3][headers/byzantine-circles]{%
     \chapheader{#1}
     \chapter[#2 #3]{#2}\vspace*{-2\parskip}{\centering\textit{\Large{#3}}\par}}
 
-\renewcommand*{\chaptermarkformat}{\footnotesize\normalfont\bfseries}
+% header/footer styles =========================================================
+
+\addtokomafont{headsepline}{\color{docolor}}
+\KOMAoptions{headsepline=.5pt:\textwidth}
+
+\renewcommand*{\chaptermarkformat}{\footnotesize\normalfont}
 
 \pagestyle{scrheadings}
 \automark*{chapter}
@@ -75,10 +89,14 @@
 \lehead{}
 \cohead{\leftmark}
 
+\newcommand{\pagenumformat}[1]{\footnotesize\normalfont\dotext{#1}}
 \lefoot*{}
-\cefoot*{\dotext{\thepage}}
+\cefoot*{\pagenumformat{\thepage}}
 \rofoot*{}
-\cofoot*{\dotext{\thepage}}
+\cofoot*{\pagenumformat{\thepage}}
+
+\setlength{\headsep}{.5\parskip}
+\setlength{\footskip}{3.5\parskip}
 
 % common prayers/text ==========================================================
 
