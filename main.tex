@@ -66,11 +66,15 @@
 \WithSuffix\newcommand\Section*[2]{%
     \dotext{\section*{#1}\vspace*{-\parskip}{\small\centering\textit{#2}\par}}}
 
+\newtoks\chapheader
+\chapheader{headers/byzantine-circles}
+
 \renewcommand{\chapterlinesformat}[3]{%
-    \includesvg[width=\textwidth]{headers/byzantine-circles}\break{}%
+    \includesvg[width=\textwidth]{\the\chapheader}\break{}%
     \Huge\centering{\textbf{\uppercase{#3}}}}
-\newcommand{\Chapter}[2]{%
-    \chapter[#1 #2]{#1}\vspace*{-2\parskip}{\centering\textit{\Large{#2}}\par}}
+\newcommand{\Chapter}[3][headers/byzantine-circles]{%
+    \chapheader{#1}
+    \chapter[#2 #3]{#2}\vspace*{-2\parskip}{\centering\textit{\Large{#3}}\par}}
 
 % TODO: there's an issue with the default page style.
 \pagestyle{plain}
