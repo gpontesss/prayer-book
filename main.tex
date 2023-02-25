@@ -47,7 +47,7 @@
 
 % domain functions =============================================================
 
-\definecolor{docolor}{HTML}{e05e6d}
+\definecolor{docolor}{HTML}{e94e61}
 \newcommand{\dotext}[1]{{\color{docolor}#1}}
 \newcommand{\dotextit}[1]{{\dotext{\textit{#1}}}}
 
@@ -77,11 +77,12 @@
 
 \renewcommand{\chapterlinesformat}[3]{%
     \ifempty{\chapheader}%
-    \else {\includesvg[width=\textwidth]{\the\chapheader}\break{}}\fi
+        {\includesvg[height=20pt]{ornaments/byzantine-cross-3}\break{}}%
+        \else {\includesvg[width=\textwidth]{\the\chapheader}\break{}}\fi
     \normalfont\Huge\centering{\uppercase{#3}}}
 \newcommand{\Chapter}[3][]{%
     \chapheader{#1}
-    \chapter[#2 #3]{#2}\vspace*{-2\parskip}{\centering\textit{\Large{#3}}\par}}
+    \chapter[#2 #3]{#2}\vspace*{-\parskip}{\centering\textit{\Large{#3}}\par}}
 
 % header/footer styles =========================================================
 
