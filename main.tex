@@ -51,6 +51,11 @@
 \newcommand{\dotext}[1]{{\color{docolor}#1}}
 \newcommand{\dotextit}[1]{{\dotext{\textit{#1}}}}
 
+\def\ifempty#1{%
+    \edef\tok{\the#1}%
+    \edef\nothing{}%
+    \ifx\tok\nothing}
+
 % stylization of chapters and sections =========================================
 
 \RedeclareSectionCommand[
@@ -63,16 +68,18 @@
     \dotext{\section*{#1}{\small\centering\textit{#2}\par}\vspace*{-\parskip}}}
 
 \newtoks\chapheader
-\chapheader{headers/byzantine-circles}
+\chapheader{}
 
 \RedeclareSectionCommand[
     beforeskip=0pt,
     afterskip=\parskip,
 ]{chapter}
+
 \renewcommand{\chapterlinesformat}[3]{%
-    % \includesvg[width=\textwidth]{\the\chapheader}\break{}%
+    \ifempty{\chapheader}%
+    \else {\includesvg[width=\textwidth]{\the\chapheader}\break{}}\fi
     \normalfont\Huge\centering{\uppercase{#3}}}
-\newcommand{\Chapter}[3][headers/byzantine-circles]{%
+\newcommand{\Chapter}[3][]{%
     \chapheader{#1}
     \chapter[#2 #3]{#2}\vspace*{-2\parskip}{\centering\textit{\Large{#3}}\par}}
 
