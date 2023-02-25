@@ -7,19 +7,39 @@
 ]{scrbook}
 
 \usepackage{fontspec}
+\usepackage{suffix}
 \usepackage{xcolor}
 \usepackage{graphicx}
 \usepackage{svg}
-\usepackage[explicit]{titlesec}
 \usepackage[portuguese]{babel}
 \usepackage{parskip} % maybe investigate using koma-script's class option
-\usepackage{hanging}
+% \usepackage{background}
 \usepackage{subfiles}
+
+% source: https://tex.stackexchange.com/questions/801/what-is-the-easiest-way-to-get-borders-around-a-page-in-latex
+% \usetikzlibrary{calc}
+% \SetBgScale{1}
+% \SetBgAngle{0}
+% \SetBgColor{black}
+% \SetBgContents{
+% \begin{tikzpicture}[overlay,remember picture]
+%     \draw [line width=1pt,rounded corners=4pt,]
+%         ($ (current page.north west) + (1mm,-1mm) $)
+%         rectangle
+%         ($ (current page.south east) + (-1mm,1mm) $);
+% \end{tikzpicture}}
 
 % TODO: extract common functions and format setup to a common package
 
 % font setup ===================================================================
 
+\newfontfamily{\garamondfont}[
+    BoldFont={[EBGaramond-Bold]},
+    ItalicFont={[EBGaramond-MediumItalic]},
+    BoldItalicFont={[EBGaramond-BoldItalic]},
+]{[EBGaramond-Medium]}
+
+% TODO: use defined garamond
 \setmainfont[
     BoldFont={[EBGaramond-Bold]},
     ItalicFont={[EBGaramond-MediumItalic]},
@@ -27,6 +47,7 @@
 ]{[EBGaramond-Medium]}
 
 \setsansfont{[EBGaramond-Regular]}
+\setkomafont{disposition}{\garamondfont}
 
 % domain functions =============================================================
 
@@ -34,32 +55,70 @@
 \newcommand{\dotext}[1]{{\color{docolor}#1}}
 \newcommand{\dotextit}[1]{{\dotext{\textit{#1}}}}
 
-\newcommand{\Chapter}[2]{%
-\chapter[#1 #2]{#1}
-{\centering\textit{\Large{#2}}\par}}
+% stylization of headers of kinds ==============================================
 
-\newcommand{\theotokion}{\textbf{\dotextit{Theotokion: }}}
-\newcommand{\eirmos}{\textbf{\dotextit{Eirmos: }}}
-\newcommand{\refrain}{\textbf{\dotextit{Refrão: }}}
+\RedeclareSectionCommand[
+    beforeskip=\parskip,
+    afterskip=\parskip,
+]{section}
+\renewcommand{\sectionlinesformat}[4]{%
+    \small\centering{\dotext{\textbf{\uppercase{#4}}}}}
+\WithSuffix\newcommand\Section*[2]{%
+    \dotext{\section*{#1}\vspace*{-\parskip}{\small\centering\textit{#2}\par}}}
+
+\renewcommand{\chapterlinesformat}[3]{%
+    \includesvg[width=\textwidth]{headers/byzantine-circles}\break{}%
+    \Huge\centering{\textbf{\uppercase{#3}}}}
+\newcommand{\Chapter}[2]{%
+    \chapter[#1 #2]{#1}\vspace*{-2\parskip}{\centering\textit{\Large{#2}}\par}}
 
 % TODO: there's an issue with the default page style.
 \pagestyle{plain}
 
-% stylization of headers of kinds ==============================================
+% \titleformat{\chapter}[block]
+%     {\Huge\centering}%
+%     {\includesvg[width=\textwidth]{headers/byzantine-circles}\break{}%
+%     \textmd{\MakeUppercase{#1}}}
+%     {0ex}%
+%     {}{}
+% \titlespacing*{\chapter}{0pt}{0pt}{8pt}
 
-\titleformat{\chapter}[block]
-    {\Huge\centering}%
-    {\includegraphics[width=\textwidth]{headers/byzantine-circles}\break{}%
-    \textmd{\MakeUppercase{#1}}}
-    {0ex}%
-    {}{}
-\titlespacing*{\chapter}{0pt}{0pt}{8pt}
+% \titleformat{\section}[block]
+%     {\small\centering}%
+%     {\dotext{\textbf{\MakeUppercase{#1}}}}
+%     {0ex}%
+%     {}{}
+% \titlespacing*{\section*}{0pt}{\parskip}{0pt}
 
-\titleformat{\section}[block]
-    {\normalsize}%
-    {\textbf{\MakeUppercase{#1}}}
-    {0ex}%
-    {}{}
+% common prayers/text ==========================================================
+
+\newcommand{\reader}{\textbf{\dotextit{Leitor: }}}
+\newcommand{\priest}{\textbf{\dotextit{Sacerdote: }}}
+\newcommand{\theotokion}{\textbf{\dotextit{Theotokion: }}}
+\newcommand{\eirmos}{\textbf{\dotextit{Eirmos: }}}
+\newcommand{\refrain}{\textbf{\dotextit{Refrão: }}}
+\newcommand{\Doxology}{\textit{Glória ao Pai, ao Filho, e ao Espírito Santo,
+    agora e sempre e pelos séculos dos séculos. Amém.}}
+\newcommand{\doxology}{\textit{Glória ao Pai, ao Filho, e ao Espírito Santo.}}
+\newcommand{\nowandever}{\textit{Agora e sempre e pelos séculos dos séculos. Amém.}}
+\newcommand{\mercy}{Senhor, tem piedade.}
+\newcommand{\repeatn}[1]{\dotextit{(#1 vezes)}}
+\newcommand{\thrice}{\repeatn{3}}
+\newcommand{\letusworship}{%
+Vinde, adoremos a Deus, nosso Rei. \\
+Vinde, adoremos e prostremo-nos diante de Cristo, nosso Rei e nosso Deus. \\
+Vinde, adoremos e prostremo-nos diante do próprio Cristo, nosso Rei e Deus.}
+\newcommand{\ourFather}{%
+Pai nosso, que estás nos Céus, Santificado seja o Teu Nome, venha a
+nós o Teu Reino, seja feita a Tua vontade, assim na terra como no Céu. O Pão
+nosso de cada dia nos dá hoje, perdoa-nos as nossas dívidas, assim como nós
+perdoamos aos nossos devedores, e não nos deixes cair em tentação, mas
+livra-nos do maligno.}
+\newcommand{\comforter}{%
+Rei dos Céus, Consolador, Espírito de Verdade, Tu que estás presente em tudo e
+enches tudo, Tesouro de bens e Doador da vida, vem e habita em nós, purifica-nos
+de toda a impureza e salva as nossas almas, Tu que és bom.}
+\newcommand{\trisagion}{Santo Deus, Santo Poderoso, Santo Imortal, tem piedade de nós!}
 
 % ==============================================================================
 
@@ -74,6 +133,7 @@
 \raggedbottom{}
 
 \tableofcontents{}
+\cleardoubleevenpage{}
 
 \mainmatter{}
 
@@ -84,5 +144,11 @@
 \subfile{blocks/supplicatory-canon-theotokos.tex}
 \subfile{blocks/canon-guardian-angel.tex}
 \subfile{blocks/akathist-sweetest-lord-jesus-christ.tex}
+\subfile{blocks/akathist-theotokos.tex}
+\subfile{blocks/communion-preparation.tex}
+\subfile{blocks/communion-thanksgiving.tex}
+\subfile{blocks/vespers-selections.tex}
+\subfile{blocks/matins-selections.tex}
+\subfile{blocks/divine-liturgy.tex}
 
 \end{document}
