@@ -111,6 +111,10 @@
   beforeskip=2pt,
 ]{chapter}{chapter}
 
+% this is necessary due to using babel
+\addto\captionsportuguese{\renewcommand{\contentsname}%
+    {\MakeUppercase{\booktitle}}}
+
 % common prayers/text ==========================================================
 
 \newcommand{\reader}{\textbf{\dotextit{Leitor: }}}
