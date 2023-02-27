@@ -20,21 +20,6 @@
 ]{scrlayer-scrpage}
 \usepackage{subfiles}
 
-\newcommand\booktitle{Livro de Orações}
-
-% source: https://tex.stackexchange.com/questions/801/what-is-the-easiest-way-to-get-borders-around-a-page-in-latex
-% \usetikzlibrary{calc}
-% \SetBgScale{1}
-% \SetBgAngle{0}
-% \SetBgColor{black}
-% \SetBgContents{
-% \begin{tikzpicture}[overlay,remember picture]
-%     \draw [line width=1pt,rounded corners=4pt,]
-%         ($ (current page.north west) + (1mm,-1mm) $)
-%         rectangle
-%         ($ (current page.south east) + (-1mm,1mm) $);
-% \end{tikzpicture}}
-
 % TODO: extract common functions and format setup to a common package
 
 % font setup ===================================================================
@@ -51,10 +36,13 @@
 \newcommand{\dotext}[1]{{\color{docolor}#1}}
 \newcommand{\dotextit}[1]{{\dotext{\textit{#1}}}}
 
-\def\ifempty#1{%
+\def\iftokempty#1{%
     \edef\tok{\the#1}%
     \edef\nothing{}%
     \ifx\tok\nothing}
+\def\ifempty#1{%
+    \def\param{#1}%
+    \ifx\param\empty}
 
 % stylization of chapters and sections =========================================
 
@@ -76,15 +64,20 @@
 ]{chapter}
 
 \renewcommand{\chapterlinesformat}[3]{%
-    \ifempty{\chapheader}%
-        {\includesvg[height=20pt]{ornaments/byzantine-cross-3}\break{}}%
-        \else {\includesvg[width=\textwidth]{\the\chapheader}\break{}}\fi
-    \normalfont\Huge\centering{\uppercase{#3}}}
+    \vspace*{-3\parskip}
+    \iftokempty{\chapheader}%
+        {\includesvg[height=14pt]{ornaments/byzantine-cross-3}\break{}}%
+        \else {\includesvg[width=\textwidth]{\the\chapheader}\par}\fi
+    \normalfont\LARGE\centering{\uppercase{#3}}}
 \newcommand{\Chapter}[3][]{%
     \chapheader{#1}
-    \chapter[#2 #3]{#2}\vspace*{-\parskip}{\centering\textit{\Large{#3}}\par}}
+    \chapter[#2 #3]{#2}%
+    \ifempty{#3}{}%
+    \else {\vspace*{-.5\parskip}{\centering\textit{\Large{#3}}\par}} \fi}
 
 % header/footer styles =========================================================
+
+\newcommand\booktitle{Livro de Orações}
 
 \addtokomafont{headsepline}{\color{docolor}}
 \KOMAoptions{headsepline=.5pt:\textwidth}
@@ -105,6 +98,18 @@
 
 \setlength{\headsep}{.5\parskip}
 \setlength{\footskip}{3.5\parskip}
+
+% table of contents styles =====================================================
+
+\setkomafont{chapterentrypagenumber}{\itshape\color{docolor}}
+\setkomafont{chapterentry}{}
+
+\newcommand*\noentrynumber[1]{}
+\DeclareTOCStyleEntry[
+  numwidth=0pt,
+  entrynumberformat=\noentrynumber,
+  beforeskip=2pt,
+]{chapter}{chapter}
 
 % common prayers/text ==========================================================
 
@@ -149,9 +154,7 @@ de toda a impureza e salva as nossas almas, Tu que és bom.}
 \raggedbottom{}
 
 \tableofcontents{}
-\cleardoubleevenpage{}
-
-\mainmatter{}
+\pagebreak{}
 
 \subfile{blocks/matins.tex}
 \subfile{blocks/during-day.tex}
