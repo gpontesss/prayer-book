@@ -1,5 +1,4 @@
 \documentclass[
-    twoside,
     DIV=14,
     fontsize=12pt,
     paper=12cm:18cm,
@@ -14,10 +13,7 @@
 \usepackage{graphicx}
 \usepackage{svg}
 \usepackage[portuguese]{babel}
-% \usepackage{background}
-\usepackage[
-    markcase=upper,
-]{scrlayer-scrpage}
+\usepackage[markcase=upper]{scrlayer-scrpage}
 \usepackage{subfiles}
 
 % TODO: extract common functions and format setup to a common package
@@ -132,18 +128,26 @@
 \newcommand{\letusworship}{%
 Vinde, adoremos a Deus, nosso Rei. \\
 Vinde, adoremos e prostremo-nos diante de Cristo, nosso Rei e nosso Deus. \\
-Vinde, adoremos e prostremo-nos diante do próprio Cristo, nosso Rei e Deus.}
+Vinde, adoremos e prostremo-nos diante do próprio Cristo, nosso Rei e Deus nosso.}
 \newcommand{\ourFather}{%
-Pai nosso, que estás nos Céus, Santificado seja o Teu Nome, venha a
-nós o Teu Reino, seja feita a Tua vontade, assim na terra como no Céu. O Pão
-nosso de cada dia nos dá hoje, perdoa-nos as nossas dívidas, assim como nós
+Pai nosso, que estás nos Céus, Santificado seja o Teu Nome. Venha a
+nós o Teu Reino. Seja feita a Tua vontade, assim na terra como no Céu. O pão
+nosso de cada dia nos dá hoje. Perdoa-nos as nossas dívidas, assim como nós
 perdoamos aos nossos devedores, e não nos deixes cair em tentação, mas
 livra-nos do maligno.}
 \newcommand{\comforter}{%
-Rei dos Céus, Consolador, Espírito de Verdade, Tu que estás presente em tudo e
-enches tudo, Tesouro de bens e Doador da vida, vem e habita em nós, purifica-nos
-de toda a impureza e salva as nossas almas, Tu que és bom.}
-\newcommand{\trisagion}{Santo Deus, Santo Poderoso, Santo Imortal, tem piedade de nós!}
+Rei dos Céus, Consolador, Espírito da Verdade, Tu que estás presente em tudo e
+preenches tudo, Tesouro de bens e Doador da vida: vem e habita em nós.
+Purifica-nos de toda a impureza e salva nossas almas, ó Tu que és bom.}
+\newcommand{\trisagion}{Santo Deus, Santo Poderoso, Santo Imortal, tem piedade de nós.}
+\newcommand{\holytrinity}{%
+Santíssima Trindade, tem piedade de nós. Senhor, purifica-nos dos 
+nossos pecados. Soberano, perdoa-nos as nossas iniquidades. Tu que és Santo, 
+cura, pelo Teu Nome, as nossas enfermidades e visita-nos.}
+
+\newcommand{\metanoia}{\dotextit{(Pequena metanóia.)}}
+\newcommand{\name}{\dotextit{Nome}}
+\newcommand{\names}{\dotextit{Nomes}}
 
 % ==============================================================================
 
@@ -160,6 +164,7 @@ de toda a impureza e salva as nossas almas, Tu que és bom.}
 
 \tableofcontents{}
 \pagebreak{}
+\pagestyle{headings}
 
 \subfile{blocks/matins.tex}
 \subfile{blocks/during-day.tex}
