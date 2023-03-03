@@ -2,11 +2,12 @@
     DIV=14,
     fontsize=12pt,
     paper=12cm:18cm,
-    headsepline=true,
     parskip=half*,
     % draft,
+    usegeometry=true,
 ]{scrbook}
 
+% \usepackage[showframe]{geometry}
 \usepackage{fontspec}
 \usepackage{suffix}
 \usepackage{xcolor}
@@ -82,9 +83,9 @@
 
 \pagestyle{scrheadings}
 \automark*{chapter}
-\cehead{\MakeMarkcase{\chaptermarkformat{\booktitle}}}
+\cehead{\MakeMarkcase{\chaptermarkformat{\booktitle}}\vspace*{1.5mm}}
 \lehead{}
-\cohead{\leftmark}
+\cohead{\leftmark\vspace*{1.5mm}}
 
 \newcommand{\pagenumformat}[1]{\footnotesize\normalfont\dotext{#1}}
 \lefoot*{}
@@ -94,6 +95,8 @@
 
 \setlength{\headsep}{.5\parskip}
 \setlength{\footskip}{3.5\parskip}
+
+\setlength{\headheight}{1.5cm}
 
 % table of contents styles =====================================================
 
