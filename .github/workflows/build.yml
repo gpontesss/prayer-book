@@ -1,0 +1,16 @@
+name: build
+run-name: Build
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: xu-cheng/latex-action@v2
+        with:
+          root_file: |
+            "*.tex"
+            "blocks/*.tex"
+          glob_root_file: true
+          latexmk_use_xelatex: true
+          latexmk_shell_scape: true
