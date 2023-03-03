@@ -9,4 +9,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: teatimeguest/setup-texlive-action@v2
+      - run: |
+          sudo apt-get install inkscape texlive-xetex texlive-lang-portuguese
+          xelatex --version
+      - run: |
+          wget https://gist.githubusercontent.com/iacchus/5f694e726e80e4b9141f5ee082bfe848/raw/e3bb8339749e7186d6f60e17712e9e27fd499ff4/install_fonts.sh
+          chmod +x install_fonts.sh
+          ./install_fonts.sh
       - run: make
