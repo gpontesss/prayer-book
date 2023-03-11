@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: set new version
-        run: "VERSION=$(./scripts/increase-version.sh)" >> "$GITHUB_ENV"
+        run: echo VERSION=$(./scripts/increase-version.sh) >> $GITHUB_ENV
       - uses: actions-ecosystem/action-push-tag@v1
         with:
           tag: ${{ env.VERSION }}
