@@ -6,23 +6,26 @@ on:
 jobs:
   increase-version:
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.inc-patch.outputs.version }}
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions-ecosystem/action-get-latest-tag@v1
-        id: get-latest-tag
-
-      - uses: actions-ecosystem/action-bump-semver@v1
-        id: bump-semver
+      - uses: actions/checkout@v3
         with:
-          current_version: ${{ steps.get-latest-tag.outputs.tag }}
-          level: patch
-
-      - uses: actions-ecosystem/action-push-tag@v1
-        with:
-          tag: ${{ steps.bump-semver.outputs.new_version }}
+          fetch-depth: 0
+      - name: increase patch
+        id: inc-patch
+        run: |
+          echo "version=$(./scripts/version.sh inc patch)" >> "$GITHUB_OUTPUT"
+      - name: push tag ${{ steps.inc-patch.outputs.version }}
+        env:
+          version: ${{ steps.inc-patch.outputs.version }}
+        run: |
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
+          git tag "$version"
+          git push origin "$version"
 
   build:
-    needs: [increase-version]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -36,3 +39,39 @@ jobs:
           ./scripts/install-font.sh "Gentium Book Plus" "EB Garamond"
       - name: build project
         run: make
+      - name: save built document
+        uses: actions/upload-artifact@v2
+        with:
+          name: built-document
+          path: out/main.pdf
+          retention-days: 1
+
+  release:
+    needs: [increase-version, build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: retrieve built document
+        uses: actions/download-artifact@v2
+        with:
+          name: built-document
+
+      - name: release
+        uses: actions/create-release@v1
+        id: create_release
+        with:
+          draft: false
+          prerelease: false
+          release_name: ${{ needs.increase-version.outputs.version }}
+          tag_name: ${{ needs.increase-version.outputs.version }}
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+      - name: upload built document
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: main.pdf
+          asset_name: prayer-book.pdf
+          asset_content_type: application/pdf
