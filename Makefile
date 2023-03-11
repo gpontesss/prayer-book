@@ -13,4 +13,4 @@ $(OUTDIR):
 
 .PHONY: clean
 clean:
-	@rm -rf $(OUTDIR)
+	@rm -rf $(OUTDIR) svg-inkscape/
