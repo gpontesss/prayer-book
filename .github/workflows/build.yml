@@ -4,7 +4,18 @@ on:
   push:
     branches: [master]
 jobs:
+  increase-version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: set new version
+        run: "VERSION=$(./scripts/increase-version.sh)" >> "$GITHUB_ENV"
+      - uses: actions-ecosystem/action-push-tag@v1
+        with:
+          tag: ${{ env.VERSION }}
+
   build:
+    needs: [increase-version]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -15,6 +26,6 @@ jobs:
           xelatex --version
       - name: install project fonts
         run: |
-          ./install-font.sh "Gentium Book Plus" "EB Garamond"
+          ./scripts/install-font.sh "Gentium Book Plus" "EB Garamond"
       - name: build project
         run: make
