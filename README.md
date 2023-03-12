@@ -12,6 +12,13 @@ Images were obtained from the [Orthodox Arts Journal] project. Since the
 repository's license allows for commercial usage, be aware that the [due credit
 should be given to the images](image-credit).
 
+## Acessing a release build
+
+Every build is available as an attached asset called `prayer-book.pdf` in its
+release. See the [latest
+release](https://github.com/gpontesss/prayer-book/releases) to get the most
+recent build.
+
 [Jordanville edition]: https://www.ponomar.net/data/jordanville_prayerbook.pdf
 [Orthodox Arts Journal]: https://orthodoxartsjournal.org/orthodox-illustration-project/
 [image-credit]: https://docs.google.com/file/d/0B1MLai552F5yZkJIQ3B0QWx3cDA/view?rm=minimal&resourcekey=0-ybOjgmmviTqQOikbXOc9ag
