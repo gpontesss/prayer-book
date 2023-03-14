@@ -32,8 +32,7 @@ jobs:
       - uses: teatimeguest/setup-texlive-action@v2
       - name: install xelatex and dependencies
         run: |
-          sudo apt-get install inkscape texlive-xetex texlive-lang-portuguese
-          xelatex --version
+          sudo apt-get install inkscape texlive-xetex texlive-lang-portuguese latexmk
       - name: install project fonts
         run: |
           ./scripts/install-font.sh "Gentium Book Plus" "EB Garamond"
