@@ -1,12 +1,13 @@
 OUTDIR = out
-TEX = xelatex -output-directory=$(OUTDIR) -shell-escape
+TEX = latexmk
+TEXARGS = -output-directory=$(OUTDIR) -shell-escape -xelatex
 DEPS = $(wildcard *.tex blocks/*.tex)
 
 .PHONY: all
 all: $(OUTDIR)/main.pdf
 
 $(OUTDIR)/%.pdf: %.tex $(DEPS) | $(OUTDIR)
-	@$(TEX) $< -o $@
+	@$(TEX) $(TEXARGS) $<
 
 $(OUTDIR):
 	@mkdir -p $@
