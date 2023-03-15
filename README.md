@@ -1,4 +1,4 @@
-![adornation](img/headers/bar18.svg)
+![adornation](img/headers/bar20.svg)
 
 # Russian Orthodox Prayer Book
 
@@ -46,4 +46,5 @@ recent build.
 [XeTeX]: https://tug.org/xetex/
 [Inkscape]: https://inkscape.org/
 [GNU Make]: https://www.gnu.org/software/make/
+[Python]: https://www.python.org/
 [build workflow]: .github/workflows/build.yml
