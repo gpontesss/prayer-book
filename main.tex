@@ -39,6 +39,14 @@
     \def\param{#1}%
     \ifx\param\empty}
 
+\newenvironment{chapterimg}[2][]{%
+    \pagestyle{empty}
+    \ifthispageodd{}{\cleardoubleevenpage{}}
+    {\vspace*{\fill}%
+     \centering\includesvg[#1]{#2}%
+     \vspace*{\fill}}}
+    {\pagestyle{headings}}
+
 % stylization of chapters and sections =========================================
 
 \RedeclareSectionCommand[
