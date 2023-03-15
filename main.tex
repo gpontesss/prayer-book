@@ -39,6 +39,14 @@
     \def\param{#1}%
     \ifx\param\empty}
 
+\newenvironment{chapterimg}[2][]{%
+    \pagestyle{empty}
+    \ifthispageodd{}{\cleardoubleevenpage{}}
+    {\vspace*{\fill}%
+     \centering\includesvg[#1]{#2}%
+     \vspace*{\fill}}}
+    {\pagestyle{headings}}
+
 % stylization of chapters and sections =========================================
 
 \RedeclareSectionCommand[
@@ -164,7 +172,7 @@ cura, pelo Teu Nome, as nossas enfermidades e visita-nos.}
 \raggedbottom{}
 
 \tableofcontents{}
-\pagebreak{}
+\cleardoubleevenpage{}
 \pagestyle{headings}
 
 \subfile{blocks/matins.tex}
