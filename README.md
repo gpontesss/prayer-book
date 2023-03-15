@@ -1,4 +1,4 @@
-![adornation](img/headers/bar20.svg)
+![adornation](img/headers/bar18.svg)
 
 # Russian Orthodox Prayer Book
 
