@@ -16,6 +16,15 @@
     })
 }
 
+// TODO: create a internal system for the library to have its outline function
+// and do the proper rendering of bilingual headings, instead of only listing
+// the left value.
+#let head(lheading, rheading, ctx: none) = {
+    text(ctx: ctx)[
+        #heading[#lheading]][
+        #heading(outlined: false)[#rheading]]
+}
+
 // Tells if the position is located in the left page.
 #let left_page(pos) = {
     calc.rem(pos.page, 2) == 0
