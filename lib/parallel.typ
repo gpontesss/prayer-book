@@ -19,10 +19,10 @@
 // TODO: create a internal system for the library to have its outline function
 // and do the proper rendering of bilingual headings, instead of only listing
 // the left value.
-#let head(lheading, rheading, ctx: none) = {
+#let head(lheading, rheading, ctx: none, outlined: true, level: 1) = {
     text(ctx: ctx)[
-        #heading[#lheading]][
-        #heading(outlined: false)[#rheading]]
+        #heading(outlined: outlined, level: level)[#lheading]][
+        #heading(outlined: false, level: level)[#rheading]]
 }
 
 // Tells if the position is located in the left page.
@@ -60,7 +60,7 @@
 }
 
 // Renders a parallel context.
-#let render(ctx, spacing: 12pt) = context {
+#let render(ctx, spacing: 15pt) = context {
     pagebreak()
     // TODO: stop using layout because it seems to constraint the rendering to a
     // container, and no pagebreaks are allowed.
@@ -78,7 +78,6 @@
         page.push((text: item, height: height))
         pages.insert(str(page_num), page)
     }
-    let info = (pages: pages)
     for (num, page) in pages {
         render_page(page, spacing)
     }
