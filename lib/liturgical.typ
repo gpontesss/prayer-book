@@ -14,3 +14,19 @@
         [ #block(subtitle) ]
     }
 }
+
+#let section-heading(title) = {
+    block(width: 100%, spacing: 15pt)[
+        #set align(center)
+        #image(
+            "../img/ornaments/jerusalem-cross.svg",
+            height: 20pt,
+            width: 20pt,
+        ) 
+        #set text(28pt)
+        #block(spacing: 0pt, smallcaps(title))
+        // Workaround to have a greater distance between the title and the beginning
+        // of the text.
+        #block(height: 20pt, spacing: 0pt)
+    ]
+}

@@ -1,22 +1,19 @@
+#import "styles.typ"
+
+#let title = state("title", "Livro de Orações")
+
 #set page(
     paper: "a5",
-    margin: (x: 1.8cm, y: 1.5cm),
+
+    margin: (left: 1.5cm,
+             right: 1.5cm,
+             top: 2.5cm,
+             bottom: 1.5cm),
+    footer: styles.footer-style(),
+    header: styles.header-style(title),
 )
 
-#show heading.where(level: 1): it => block(width: 100%)[
-    #set align(center)
-    #image(
-        "img/ornaments/jerusalem-cross.svg",
-        height: 20pt,
-        width: 20pt,
-    ) 
-    #set text(28pt)
-    #block(spacing: 0pt, smallcaps(it.body))
-    // Workaround to have a greater distance between the title and the beginning
-    // of the text.
-    #block(height: 20pt, spacing: 0pt)
-]
+#show heading.where(level: 1): styles.heading-style
 
 #outline()
-
 #include "sections/morning-prayers.typ"

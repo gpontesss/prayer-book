@@ -1,10 +1,10 @@
 #import "../lib/parallel.typ"
-#import "../lib/liturgical.typ": dotext, prayer-title
+#import "../lib/liturgical.typ": dotext, prayer-title, section-heading
 
 #let ctx = parallel.new("morning-prayers")
 
-#parallel.head(ctx: ctx)[
-    Morning Prayers][
+#parallel.head(ctx: ctx, fmt: section-heading)[
+    Orações Matinais][
     Начальные Молитвы]
 
 #parallel.text(ctx: ctx)[
@@ -27,13 +27,14 @@ Glória a Ti, nosso Deus, glória a Ti. ][
 Rei Celestial, Consolador, Espírito da Verdade, que está em toda parte e
     preenche tudo, a fonte de bênçãos e o doador da vida, venha e habite em nós,
     e nos purifique de toda sujeira e salve, ó Bom Deus, nossas almas. ][
-Царю Небесный, Утешителю, Дух Истины, Который везде находишься и все
-    наполняешь, источник благ и податель жизни, приди и вселись в нас, и очисти
-    нас от всякой скверны и спаси, Благой, наши души. ]
+Царю Небесный, Утешителю, Дух Истины, Который везде находишься и все наполняешь,
+    источник благ и податель жизни, приди и вселись в нас, и очисти нас от
+    всякой скверны и спаси, Благой, наши души. ]
 
 #parallel.text(ctx: ctx)[
-Santo Deus, Santo Poderoso, Santo Imortal, tende piedade de nós (três vezes). ][
-Святый Боже, Святый Крепкий, Святый Бессмертный, помилуй нас (трижды). ]
+    Santo Deus, Santo Poderoso, Santo Imortal, tende piedade de nós (três
+    vezes). ][
+    Святый Боже, Святый Крепкий, Святый Бессмертный, помилуй нас (трижды). ]
 
 #parallel.text(ctx: ctx)[
 Glória ao Pai, e ao Filho, e ao Espírito Santo, agora (agora) e sempre
@@ -45,8 +46,7 @@ Glória ao Pai, e ao Filho, e ao Espírito Santo, agora (agora) e sempre
 Santíssima Trindade, tende piedade de nós. Senhor, purifica nossos pecados,
     Mestre, perdoa nossas iniquidades, Santo, visita e cura nossas enfermidades
     por amor do Teu nome. ][
-Пресвятая Т
-    роице, помилуй нас. Господи, очисти грехи наши, Владыка, прости
+Пресвятая Троице, помилуй нас. Господи, очисти грехи наши, Владыка, прости
     беззакония наши, Святый, посети и исцели немощи наши имени Твоего ради. ]
 
 #parallel.text(ctx: ctx)[
