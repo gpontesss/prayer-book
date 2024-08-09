@@ -3,3 +3,4 @@ integral.pdf
 svg-inkscape/
 *.log
 *.pdf
+.DS_Store
